@@ -1,0 +1,23 @@
+.timer{
+    text-align: center;
+    background-position: center;
+    background-color: #898989f2;
+    padding: 40px;
+    margin: 280px 400px;
+    border-radius: 50px;
+}
+
+#start{
+    background-color: rgb(61, 188, 61);
+    color: white;
+    border-radius: 10px;
+    height: 40px;
+    width: 140px;
+}
+#stop{
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    height: 40px;
+    width: 140px;
+}

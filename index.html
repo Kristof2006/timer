@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown timer</title>
+    <link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+    <div class = "timer" >
+        <h1 id = "displayTime">20</h1>
+        <button id = "start" onclick="TimerStart()">Start</button>
+        <button id = "stop" onclick="TimerCsumi()">Stop</button>
+<script>
+    let time = 20;
+    let timer = null;
+    let puca = 0;
+    let displayTime = document.getElementById("displayTime");
+    let displayButton = document.getElementById("stop");
+
+    function TimerRunning() {
+        time--;
+        if(time === 0) {
+            TimerReset();
+        }
+        if (time < 10) {
+            displayTime.innerHTML = "0"+time;
+        }
+        else {
+            displayTime.innerHTML = time;
+        }
+    }
+    function TimerStart() {
+        if(timer !== null) {
+            clearInterval(timer);
+        }
+        displayTime.innerHTML = time
+        timer = setInterval(TimerRunning, 1000);
+        displayButton.innerHTML = "Stop";
+        document.getElementById("stop").style.backgroundColor = "red";
+        puca = 0;
+    }
+    function TimerStop() {
+        clearInterval(timer);
+    }
+    function TimerReset() {
+        clearInterval(timer);
+        time = 20;
+        displayTime.innerHTML = "20";
+    }
+    function TimerCsumi() {
+        if(puca ===0 && timer !== null) {
+            TimerStop();
+            displayButton.innerHTML = "Reset";
+            document.getElementById("stop").style.backgroundColor = "orange";
+            puca=1;
+        }
+        else {
+            TimerReset();
+            displayButton.innerHTML = "Stop";
+            document.getElementById("stop").style.backgroundColor = "red";
+            puca=0;
+        }
+    }
+            
+</script>
+</body>
+</html>
