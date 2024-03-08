@@ -1,68 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Countdown timer</title>
-    <link rel = "stylesheet" href = "style.css">
-</head>
-<body>
-    <div class = "timer" >
-        <h1 id = "displayTime">20</h1>
-        <button id = "start" onclick="TimerStart()">Start</button>
-        <button id = "stop" onclick="TimerCsumi()">Stop</button>
-<script>
-    let time = 20;
-    let timer = null;
-    let puca = 0;
-    let displayTime = document.getElementById("displayTime");
-    let displayButton = document.getElementById("stop");
-
-    function TimerRunning() {
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="backbutton"></div>
+    <div id="startPomodoro" onclick="createPomodoro()">
+      Indit Pomodoro program
+    </div>
+    <div id="startPomodoro" onclick="createStopper()">
+      Indit Stopper program
+    </div>
+    <div id="timerid" class="timer"></div>
+    <script>
+      function homePage() {
+        history.pushState({}, "", "/");
+        document.getElementById("startPomodoro").style.display = "block";
+        const timer = document.getElementById("timerid");
+        timer.innerHTML = null;
+      }
+      let time = 20;
+      let timer = null;
+      let puca = 0;
+      let displayTime = document.getElementById("displayTime");
+      let displayButton = document.getElementById("stop");
+      function createStopper() {
+        alert("Not implemented yet");
+      }
+      function createPomodoro() {
+        document.getElementById("startPomodoro").style.display = "none";
+        history.pushState({}, "", "/pomodoro");
+        const h1 = document.createElement("h1");
+        h1.id = "displayTime";
+        h1.innerHTML = 20;
+        const startButton = document.createElement("button");
+        startButton.id = "start";
+        startButton.onclick = TimerStart;
+        startButton.innerHTML = "Start";
+        const stopButton = document.createElement("button");
+        stopButton.id = "stop";
+        stopButton.onclick = TimerStop;
+        stopButton.innerHTML = "Stop";
+        const backbutton = document.getElementById("backbutton");
+        backbutton.onclick = homePage;
+        backbutton.innerHTML = "Back to Homepage";
+        const timerContainer = document.getElementById("timerid");
+        timerContainer.appendChild(h1);
+        timerContainer.appendChild(startButton);
+        timerContainer.appendChild(stopButton);
+      }
+      function TimerRunning() {
+        let displayTime = document.getElementById("displayTime");
         time--;
-        if(time === 0) {
-            TimerReset();
+        if (time === 0) {
+          TimerReset();
         }
         if (time < 10) {
-            displayTime.innerHTML = "0"+time;
+          displayTime.innerHTML = "0" + time;
+        } else {
+          displayTime.innerHTML = time;
         }
-        else {
-            displayTime.innerHTML = time;
+      }
+      function TimerStart() {
+        let displayTime = document.getElementById("displayTime");
+        if (timer !== null) {
+          clearInterval(timer);
         }
-    }
-    function TimerStart() {
-        if(timer !== null) {
-            clearInterval(timer);
-        }
-        displayTime.innerHTML = time
+        displayTime.innerHTML = time;
+
         timer = setInterval(TimerRunning, 1000);
         displayButton.innerHTML = "Stop";
         document.getElementById("stop").style.backgroundColor = "red";
         puca = 0;
-    }
-    function TimerStop() {
+      }
+      function TimerStop() {
         clearInterval(timer);
-    }
-    function TimerReset() {
+      }
+      function TimerReset() {
+        let displayTime = document.getElementById("displayTime");
         clearInterval(timer);
         time = 20;
         displayTime.innerHTML = "20";
-    }
-    function TimerCsumi() {
-        if(puca ===0 && timer !== null) {
-            TimerStop();
-            displayButton.innerHTML = "Reset";
-            document.getElementById("stop").style.backgroundColor = "orange";
-            puca=1;
+      }
+      function TimerCsumi() {
+        if (puca === 0 && timer !== null) {
+          TimerStop();
+          displayButton.innerHTML = "Reset";
+          document.getElementById("stop").style.backgroundColor = "orange";
+          puca = 1;
+        } else {
+          TimerReset();
+          displayButton.innerHTML = "Stop";
+          document.getElementById("stop").style.backgroundColor = "red";
+          puca = 0;
         }
-        else {
-            TimerReset();
-            displayButton.innerHTML = "Stop";
-            document.getElementById("stop").style.backgroundColor = "red";
-            puca=0;
-        }
-    }
-            
-</script>
-</body>
+      }
+      //   window.addEventListener("load", () => createPomodoro());
+    </script>
+  </body>
 </html>
