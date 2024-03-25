@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Pomodoro from "./Pomodoro";
+import Stopper from "./Stopper";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "stopper",
-        element: <div>stopper vagyok</div>,
+        element: <Stopper meddig={10}></Stopper>,
       },
     ],
   },

@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 export default function Pomodoro() {
   const [time, setTime] = useState(10);
@@ -13,9 +14,10 @@ export default function Pomodoro() {
   }, [time]);
 
   return (
-    <div>
+    <div className="flex gap-2 flex-col items-center">
       <h1>{time}</h1>
-      <button
+      <div className="flex flex-row gap-4">
+      <Button variant="contained" color="success"
         onClick={() => {
           console.log("start");
           if (!timer) {
@@ -34,8 +36,8 @@ export default function Pomodoro() {
         }}
       >
         Start
-      </button>
-      <button
+      </Button>
+      <Button variant="outlined" color="error"
         onClick={() => {
           if (timer) {
             clearInterval(timer);
@@ -47,9 +49,11 @@ export default function Pomodoro() {
             setReset(false);
           }
         }}
+
       >
         {reset ? "Reset" : "Stop"}
-      </button>
+      </Button>
+      </div>
     </div>
   );
 }
